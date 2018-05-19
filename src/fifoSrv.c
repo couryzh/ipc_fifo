@@ -8,9 +8,9 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "JHFIFOSrv.h"
+#include "fifoSrv.h"
 
-struct JHFIFO JHFIFOSrv;
+struct fifo fifoSrv;
 
 int runFlag = 1;
 
@@ -19,7 +19,7 @@ void handleSigint(int signum)
 	runFlag = 0;
 }
 
-struct JHFIFO * JHFIFOSrvInit()
+struct fifo * fifoSrvInit()
 {
 	struct sigaction sa;
 
@@ -36,11 +36,11 @@ struct JHFIFO * JHFIFOSrvInit()
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGPIPE, &sa, NULL);
 
-	JHFIFOSrv.type = SRV_TERMINAL;
-	return &JHFIFOSrv;
+	fifoSrv.type = SRV_TERMINAL;
+	return &fifoSrv;
 }
 
-int JHFIFOSrvLoop(struct JHFIFO * fifo, JHFIFOSrvHandler handler)
+int fifoSrvLoop(struct fifo * fifo, fifoSrvHandler handler)
 {
 	int dummyFd;
 	char recvBuff[256], sendBuff[4096];

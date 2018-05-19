@@ -1,11 +1,11 @@
 #ifndef JHFIFOSRV_H
 #define JHFIFOSRV_H
 
-#include "JHFIFO.h"
+#include "fifo.h"
 
-typedef int(*JHFIFOSrvHandler)(const char * req, int reqLen, char * resp, int respLen);
+typedef int(*fifoSrvHandler)(const char * req, int reqLen, char * resp, int respLen);
 
-struct JHFIFO * JHFIFOSrvInit();
+struct fifo * fifoSrvInit();
 
-int JHFIFOSrvLoop(struct JHFIFO * fifo, JHFIFOSrvHandler handler);
+int fifoSrvLoop(struct fifo * fifo, fifoSrvHandler handler);
 #endif

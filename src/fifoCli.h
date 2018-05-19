@@ -1,12 +1,12 @@
 #ifndef JHFIFOCLI_H
 #define JHFIFOCLI_H
 
-#include "JHFIFO.h"
+#include "fifo.h"
 
-struct JHFIFO * JHFIFOCliInit();
+struct fifo * fifoCliInit();
 
-int JHFIFOCliComm(struct JHFIFO * fifo, const char * req, int reqLen, char * resp, int respLen);
+int fifoCliComm(struct fifo * fifo, const char * req, int reqLen, char * resp, int respLen);
 
-void JHFIFOCliClose(struct JHFIFO * fifo);
+void fifoCliClose(struct fifo * fifo);
 
 #endif

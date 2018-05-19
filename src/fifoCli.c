@@ -8,22 +8,22 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "JHFIFOCli.h"
+#include "fifoCli.h"
 
-struct JHFIFO JHFIFOCli;
+struct fifo fifoCli;
 
-struct JHFIFO * JHFIFOCliInit()
+struct fifo * fifoCliInit()
 {
 	if (mkfifo(CLI_FIFO_FILE, 0666) < 0 && (errno != EEXIST)) {
 		perror("mkfifo cli");
 		return NULL;
 	}
-	JHFIFOCli.type = CLI_TERMINAL;
-	return &JHFIFOCli;
+	fifoCli.type = CLI_TERMINAL;
+	return &fifoCli;
 }
 
 
-int JHFIFOCliComm(struct JHFIFO * fifo, const char * req, int reqLen, char * resp, int respLen)
+int fifoCliComm(struct fifo * fifo, const char * req, int reqLen, char * resp, int respLen)
 {
 	int n, nresp;
 
@@ -47,7 +47,7 @@ int JHFIFOCliComm(struct JHFIFO * fifo, const char * req, int reqLen, char * res
 	return nresp;
 }
 
-void JHFIFOCliClose(struct JHFIFO * fifo)
+void fifoCliClose(struct fifo * fifo)
 {
 	close(fifo->readFd);
 	close(fifo->writeFd);
